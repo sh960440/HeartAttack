@@ -13,10 +13,12 @@ public enum PlayerIndex
 public class GameHandler : MonoBehaviour
 {
     GameUIController gameUI;
+    CardStack cardStack;
 
     void Start()
     {
         gameUI = FindObjectOfType<GameUIController>();
+        cardStack = FindObjectOfType<CardStack>();
     }
 
     void Update()
@@ -26,6 +28,7 @@ public class GameHandler : MonoBehaviour
 
     public void CardButtonPressed(int index)
     {
+        cardStack.SpawnCard();
         Debug.Log((PlayerIndex)index + "出牌");
     }
 
