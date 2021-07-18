@@ -15,10 +15,5 @@ public class GameAsset : MonoBehaviour
         }
     }
 
-    public GameObject cardTemplate;
 
-    public Sprite[] clubs;
-    public Sprite[] diamonds;
-    public Sprite[] hearts;
-    public Sprite[] spades;
 }

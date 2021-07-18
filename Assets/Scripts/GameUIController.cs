@@ -11,27 +11,11 @@ public class GameUIController : MonoBehaviour
         hands = transform.Find("HandIcons").GetComponent<RectTransform>();
     }
 
-    public void ShowSlapImage(int index) // TODO: 可以考慮簡化
+    public void ShowSlapImage(int index)
     {
-        switch (index)
-        {
-            case 0:
-                hands.Find("Player_1_Hand").gameObject.SetActive(true);
-                hands.Find("Player_1_Hand").SetAsLastSibling();
-                break;
-            case 1:
-                hands.Find("Player_2_Hand").gameObject.SetActive(true);
-                hands.Find("Player_2_Hand").SetAsLastSibling();
-                break;
-            case 2:
-                hands.Find("Player_3_Hand").gameObject.SetActive(true);
-                hands.Find("Player_3_Hand").SetAsLastSibling();
-                break;
-            case 3:
-                hands.Find("Player_4_Hand").gameObject.SetActive(true);
-                hands.Find("Player_4_Hand").SetAsLastSibling();
-                break;
-        }
+        string handIconName = "Player_" + index + "_Hand";
+        hands.Find(handIconName).gameObject.SetActive(true);
+        hands.Find(handIconName).SetAsLastSibling();
     }
 
     public void HideHands()

@@ -2,39 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerIndex
-{
-    FirstPlayer,
-    SecondPlayer,
-    ThirdPlayer,
-    FourthPlayer
-}
-
 public class GameHandler : MonoBehaviour
 {
-    GameUIController gameUI;
-    CardStack cardStack;
+    private CardStack cardStack;
+    private GameUIController gameUI;
+    private List<Player> players;
+    private int currentPlayer;
 
-    void Start()
+    private void Start()
     {
         gameUI = FindObjectOfType<GameUIController>();
         cardStack = FindObjectOfType<CardStack>();
-    }
+        players = new List<Player>();
+        currentPlayer = 0;
 
-    void Update()
-    {
+        for (int i = 0; i < 4; i++)
+        {
+            players.Add(new Player(cardStack.DistributeCards()));
+        }
 
+        // for (int i = 0; i < 4; i++)
+        // {
+        //     for (int j = 0; j < 4; j++)
+        //     {
+        //         Debug.Log("玩家" + (i + 1).ToString() + "的第" + (j + 1).ToString() + "張卡片是" + players[i].cardsInHand[j].cardName);
+        //     }
+        // }
     }
 
     public void CardButtonPressed(int index)
     {
-        cardStack.SpawnCard();
-        Debug.Log((PlayerIndex)index + "出牌");
+        if (currentPlayer == index)
+        {
+            cardStack.SpawnCard(players[currentPlayer].GetNextCardToPlay());
+            
+            currentPlayer++;
+            if (currentPlayer > 3)
+            {
+                currentPlayer = 0;
+            }
+        }
+        else
+        {
+            Debug.Log("不是你的回合");
+        }
     }
 
     public void SlapButtonPressed(int index)
     {
         gameUI.ShowSlapImage(index);
-        Debug.Log((PlayerIndex)index + "拍!!");
     }
 }
