@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 128408386}
   - component: {fileID: 128408385}
   m_Layer: 5
-  m_Name: Player 2 Card Button
+  m_Name: Card Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -942,7 +942,7 @@ GameObject:
   - component: {fileID: 400668711}
   - component: {fileID: 400668710}
   m_Layer: 5
-  m_Name: Player 4 Slap Button
+  m_Name: Slap Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1345,7 +1345,7 @@ GameObject:
   - component: {fileID: 514963575}
   - component: {fileID: 514963574}
   m_Layer: 5
-  m_Name: Player 1 Slap Button
+  m_Name: Slap Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2535,7 +2535,7 @@ GameObject:
   - component: {fileID: 910721995}
   - component: {fileID: 910721994}
   m_Layer: 5
-  m_Name: Player 1 Card Button
+  m_Name: Card Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2958,7 +2958,7 @@ GameObject:
   - component: {fileID: 1115544531}
   - component: {fileID: 1115544530}
   m_Layer: 5
-  m_Name: Player 2 Slap Button
+  m_Name: Slap Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4958,7 +4958,7 @@ GameObject:
   - component: {fileID: 1739773905}
   - component: {fileID: 1739773904}
   m_Layer: 5
-  m_Name: Player 3 Slap Button
+  m_Name: Slap Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5091,7 +5091,7 @@ GameObject:
   - component: {fileID: 1794929083}
   - component: {fileID: 1794929082}
   m_Layer: 5
-  m_Name: Player 4 Card Button
+  m_Name: Card Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5487,7 +5487,7 @@ GameObject:
   - component: {fileID: 1842455838}
   - component: {fileID: 1842455837}
   m_Layer: 5
-  m_Name: Player 3 Card Button
+  m_Name: Card Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

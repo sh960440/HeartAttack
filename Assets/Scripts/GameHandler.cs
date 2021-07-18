@@ -8,6 +8,8 @@ public class GameHandler : MonoBehaviour
     private GameUIController gameUI;
     private List<Player> players;
     private int currentPlayer;
+    private int currentNumber;
+    private bool isSlappable;
 
     private void Start()
     {
@@ -15,41 +17,40 @@ public class GameHandler : MonoBehaviour
         cardStack = FindObjectOfType<CardStack>();
         players = new List<Player>();
         currentPlayer = 0;
+        currentNumber = 0;
+        isSlappable = false;
 
         for (int i = 0; i < 4; i++)
         {
             players.Add(new Player(cardStack.DistributeCards()));
         }
-
-        // for (int i = 0; i < 4; i++)
-        // {
-        //     for (int j = 0; j < 4; j++)
-        //     {
-        //         Debug.Log("玩家" + (i + 1).ToString() + "的第" + (j + 1).ToString() + "張卡片是" + players[i].cardsInHand[j].cardName);
-        //     }
-        // }
     }
 
-    public void CardButtonPressed(int index)
+    public void CardButtonPressed(int playerIndex)
     {
-        if (currentPlayer == index)
+        if (currentPlayer == playerIndex)
         {
-            cardStack.SpawnCard(players[currentPlayer].GetNextCardToPlay());
+            players[playerIndex].PlayCard(cardStack);
+
+            currentNumber++;
+            if (currentNumber > 13) currentNumber = 1;
             
             currentPlayer++;
-            if (currentPlayer > 3)
-            {
-                currentPlayer = 0;
-            }
-        }
-        else
-        {
-            Debug.Log("不是你的回合");
+            if (currentPlayer > 3) currentPlayer = 0;
         }
     }
 
     public void SlapButtonPressed(int index)
     {
         gameUI.ShowSlapImage(index);
+
+        if (currentNumber == cardStack.GetCardNumberOnTop())
+        {
+            Debug.Log("玩家" + index + "安全");
+        }
+        else
+        {
+            Debug.Log("玩家" + index + "輸了");
+        }
     }
 }

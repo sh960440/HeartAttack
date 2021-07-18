@@ -11,6 +11,15 @@ public class Player
         cardsInHand = initialHand;
     }
 
+    public void PlayCard(CardStack cardStack)
+    {
+        if (cardsInHand.Count > 0)
+        {
+            cardStack.SpawnCard(cardsInHand[0]);
+            cardsInHand.RemoveAt(0);
+        }
+    }
+
     public string GetNextCardToPlay()
     {
         if (cardsInHand.Count > 0)
