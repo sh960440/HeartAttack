@@ -21,8 +21,16 @@ public class CardStack : MonoBehaviour
         RectTransform cardRectTransform = transform.Find(card.cardName).GetComponent<RectTransform>();
         cardRectTransform.localPosition = new Vector3(Random.Range(-200.0f, 200.0f), Random.Range(-200.0f, 200.0f));
         cardRectTransform.Rotate(new Vector3(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
-        cardRectTransform.transform.SetAsLastSibling();
+        cardRectTransform.SetAsLastSibling();
         cardRectTransform.gameObject.SetActive(true);  
+    }
+
+    public void HideAllCards()
+    {
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            this.transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 
     public List<Card> DistributeCards()

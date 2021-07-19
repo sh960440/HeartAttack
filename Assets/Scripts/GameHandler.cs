@@ -9,7 +9,6 @@ public class GameHandler : MonoBehaviour
     private List<Player> players;
     private int currentPlayer;
     private int currentNumber;
-    private bool isSlappable;
 
     private void Start()
     {
@@ -18,7 +17,6 @@ public class GameHandler : MonoBehaviour
         players = new List<Player>();
         currentPlayer = 0;
         currentNumber = 0;
-        isSlappable = false;
 
         for (int i = 0; i < 4; i++)
         {
@@ -31,6 +29,7 @@ public class GameHandler : MonoBehaviour
         if (currentPlayer == playerIndex)
         {
             players[playerIndex].PlayCard(cardStack);
+            gameUI.UpdateCardButtonText(playerIndex, players[playerIndex].GetCardAmount());
 
             currentNumber++;
             if (currentNumber > 13) currentNumber = 1;
@@ -40,17 +39,21 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    public void SlapButtonPressed(int index)
+    public void SlapButtonPressed(int playerIndex)
     {
-        gameUI.ShowSlapImage(index);
+        gameUI.ShowSlapImage(playerIndex);
 
         if (currentNumber == cardStack.GetCardNumberOnTop())
         {
-            Debug.Log("玩家" + index + "安全");
+            Debug.Log("玩家" + playerIndex + "安全");
         }
         else
         {
-            Debug.Log("玩家" + index + "輸了");
+            Debug.Log("玩家" + playerIndex + "輸了");
+            players[playerIndex].CollectAllCardsOnTable(cardStack); // 輸家收下桌上所有的牌
+            gameUI.UpdateCardButtonText(playerIndex, players[playerIndex].GetCardAmount()); // 更新輸家的卡牌數
+
+            currentPlayer = playerIndex; // 從輸家開始下一回合
         }
     }
 }

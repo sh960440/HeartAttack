@@ -20,17 +20,13 @@ public class Player
         }
     }
 
-    public string GetNextCardToPlay()
+    public void CollectAllCardsOnTable(CardStack cardStack)
     {
-        if (cardsInHand.Count > 0)
-        {
-            string nextCard = cardsInHand[0].cardName;
-            cardsInHand.RemoveAt(0);
-            return nextCard;
-        }
-        else
-        {
-            return null;
-        }
+        cardsInHand.AddRange(cardStack.cardsOnTable);
+        cardStack.cardsOnTable.Clear();
+        cardStack.HideAllCards();
+        // 洗牌?
     }
+
+    public int GetCardAmount() => cardsInHand.Count;
 }

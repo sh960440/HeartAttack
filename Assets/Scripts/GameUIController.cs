@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameUIController : MonoBehaviour
 {
     private RectTransform hands;
+    [SerializeField] private TMP_Text[] cardButtonTexts;
 
     private void Awake()
     {
@@ -24,5 +26,10 @@ public class GameUIController : MonoBehaviour
         {
             hand.gameObject.SetActive(false);
         }
+    }
+
+    public void UpdateCardButtonText(int playerIndex, int amount)
+    {
+        cardButtonTexts[playerIndex].text = amount.ToString();
     }
 }
