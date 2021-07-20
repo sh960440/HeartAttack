@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player
 {
-    public List<Card> cardsInHand; 
+    private List<Card> cardsInHand; 
 
     public Player(List<Card> initialHand)
     {
@@ -29,4 +29,5 @@ public class Player
     }
 
     public int GetCardAmount() => cardsInHand.Count;
+    public bool HasNoCards() => cardsInHand.Count <= 0; 
 }

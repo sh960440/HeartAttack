@@ -5,21 +5,13 @@ using UnityEngine;
 public class CardStack : MonoBehaviour
 {
     public List<Card> cardsOnTable; 
-    public void SpawnRandomCard() // For testing only
-    {
-        RectTransform card = transform.GetChild(Random.Range(0, transform.childCount)).GetComponent<RectTransform>();
-        card.localPosition = new Vector3(Random.Range(-200.0f, 200.0f), Random.Range(-200.0f, 200.0f));
-        card.Rotate(new Vector3(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
-        card.transform.SetAsLastSibling();
-        card.gameObject.SetActive(true);
-    }
 
     public void SpawnCard(Card card)
     {
         cardsOnTable.Add(card);
 
         RectTransform cardRectTransform = transform.Find(card.cardName).GetComponent<RectTransform>();
-        cardRectTransform.localPosition = new Vector3(Random.Range(-200.0f, 200.0f), Random.Range(-200.0f, 200.0f));
+        cardRectTransform.localPosition = new Vector3(Random.Range(-120.0f, 120.0f), Random.Range(-120.0f, 120.0f));
         cardRectTransform.Rotate(new Vector3(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
         cardRectTransform.SetAsLastSibling();
         cardRectTransform.gameObject.SetActive(true);  

@@ -8,6 +8,7 @@ public class GameUIController : MonoBehaviour
 {
     private RectTransform hands;
     private RectTransform numberTrackers;
+    private RectTransform gameMessage;
     [SerializeField] private Image[] cardButtonImages;
     [SerializeField] private TMP_Text[] cardButtonTexts;
 
@@ -15,6 +16,7 @@ public class GameUIController : MonoBehaviour
     {
         hands = transform.Find("HandIcons").GetComponent<RectTransform>();
         numberTrackers = transform.Find("NumberTrackers").GetComponent<RectTransform>();
+        gameMessage = transform.Find("GameMessage").GetComponent<RectTransform>();
     }
 
     public void ShowSlapImage(int index)
@@ -71,5 +73,31 @@ public class GameUIController : MonoBehaviour
         }
 
         cardButtonImages[playerIndex].color = targetColor;
+    }
+
+    public void ShowWinGameMessage(int playerIndex)
+    {
+        string winner = "Someone";
+        switch (playerIndex)
+        {
+            case 0:
+                winner = "Green"; break;
+            case 1:
+                winner = "Yellow"; break;
+            case 2:
+                winner = "Blue"; break;
+            case 3:
+                winner = "Red"; break;
+        }
+        
+        foreach (RectTransform rectTransform in gameMessage)
+        {
+            TMP_Text t;
+            if (rectTransform.TryGetComponent<TMP_Text>(out t))
+            {
+                t.text = "Player " + winner + " Wins!";
+            }
+        }
+        gameMessage.gameObject.SetActive(true);
     }
 }
