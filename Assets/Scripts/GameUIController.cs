@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameUIController : MonoBehaviour
 {
     private RectTransform hands;
+    private RectTransform numberTrackers;
+    [SerializeField] private Image[] cardButtonImages;
     [SerializeField] private TMP_Text[] cardButtonTexts;
 
     private void Awake()
     {
         hands = transform.Find("HandIcons").GetComponent<RectTransform>();
+        numberTrackers = transform.Find("NumberTrackers").GetComponent<RectTransform>();
     }
 
     public void ShowSlapImage(int index)
@@ -31,5 +35,41 @@ public class GameUIController : MonoBehaviour
     public void UpdateCardButtonText(int playerIndex, int amount)
     {
         cardButtonTexts[playerIndex].text = amount.ToString();
+    }
+
+    public void UpdateNumberTrackers(int currentNumber)
+    {
+        foreach (RectTransform rectTransform in numberTrackers)
+        {
+            TMP_Text t;
+            if (rectTransform.TryGetComponent<TMP_Text>(out t))
+            {
+                switch (currentNumber)
+                {
+                    default:
+                        t.text = currentNumber.ToString(); break;
+                    case -1:
+                        t.text = "-"; break;
+                    case 1:
+                        t.text = "A"; break;
+                    case 11:
+                        t.text = "J"; break;
+                    case 12:
+                        t.text = "Q"; break;
+                    case 13:
+                        t.text = "K"; break;   
+                }                
+            }
+        }
+    }
+
+    public void SetCardButtonColor(int playerIndex, Color targetColor)
+    {
+        foreach(Image img in cardButtonImages)
+        {
+            img.color = Color.white;
+        }
+
+        cardButtonImages[playerIndex].color = targetColor;
     }
 }

@@ -18,7 +18,10 @@ public class GameHandler : MonoBehaviour
         cardStack = FindObjectOfType<CardStack>();
         players = new List<Player>();
         didPlayersSlap = new bool[] {false, false, false, false};
-        currentPlayer = 0;
+
+        currentPlayer = Random.Range(0, 4);
+        gameUI.SetCardButtonColor(currentPlayer, new Color(0.5f, 1.0f, 1.0f));
+
         currentNumber = 0;
 
         for (int i = 0; i < 4; i++)
@@ -34,11 +37,18 @@ public class GameHandler : MonoBehaviour
             players[playerIndex].PlayCard(cardStack);
             gameUI.UpdateCardButtonText(playerIndex, players[playerIndex].GetCardAmount());
 
+            if (players[playerIndex].GetCardAmount() <= 0)
+            {
+                Debug.Log("玩家" + playerIndex + "沒牌了!");
+            }
+
             currentNumber++;
             if (currentNumber > 13) currentNumber = 1;
+            gameUI.UpdateNumberTrackers(currentNumber);
             
             currentPlayer++;
             if (currentPlayer > 3) currentPlayer = 0;
+            gameUI.SetCardButtonColor(currentPlayer, new Color(0.5f, 1.0f, 1.0f));
         }
     }
 
@@ -89,17 +99,24 @@ public class GameHandler : MonoBehaviour
 
     private void LoseThisTurn(int playerIndex)
     {
-        Debug.Log("玩家" + playerIndex + "輸了");
         players[playerIndex].CollectAllCardsOnTable(cardStack); // 輸家收下桌上所有的牌
         gameUI.UpdateCardButtonText(playerIndex, players[playerIndex].GetCardAmount()); // 更新輸家的卡牌數
         gameUI.HideHands(); // 隱藏蓋下的手
 
         currentNumber = 0; // 重置數字
         currentPlayer = playerIndex; // 從輸家開始下一回合
+        gameUI.SetCardButtonColor(currentPlayer, new Color(0.5f, 1.0f, 1.0f));
 
         for (int i = 0; i < didPlayersSlap.Length; i++) // 把didPlayersSlap全部設置為false
         {
             didPlayersSlap[i] = false;
         }
+
+        gameUI.UpdateNumberTrackers(-1);
+    }
+
+    private void SetCurrentPlayer(int playerIndex)
+    {
+
     }
 }
