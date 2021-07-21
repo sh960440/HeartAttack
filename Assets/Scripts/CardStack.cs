@@ -45,8 +45,6 @@ public class CardStack : MonoBehaviour
         }
     }
 
-    public int GetCardNumberOnTop()
-    {
-        return cardsOnTable[cardsOnTable.Count - 1].cardNumber;
-    }
+    public int GetCardNumberOnTop() => cardsOnTable[cardsOnTable.Count - 1].cardNumber;
+    public int GetCardAmountOnTable() => cardsOnTable.Count;
 }

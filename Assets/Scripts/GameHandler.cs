@@ -55,7 +55,7 @@ public class GameHandler : MonoBehaviour
 
     public void SlapButtonPressed(int playerIndex)
     {
-        if (cardStack.cardsOnTable.Count <= 0) return; // 假如桌上沒有任何牌
+        if (cardStack.GetCardAmountOnTable() <= 0) return; // 假如桌上沒有任何牌
 
         gameUI.ShowSlapImage(playerIndex);
 
@@ -100,6 +100,7 @@ public class GameHandler : MonoBehaviour
 
     private void LoseThisTurn(int playerIndex)
     {
+        gameUI.ShowLoseMessage(playerIndex, cardStack.GetCardAmountOnTable());
         players[playerIndex].CollectAllCardsOnTable(cardStack); // 輸家收下桌上所有的牌
         gameUI.UpdateCardButtonText(playerIndex, players[playerIndex].GetCardAmount()); // 更新輸家的卡牌數
         gameUI.HideHands(); // 隱藏蓋下的手
@@ -117,7 +118,7 @@ public class GameHandler : MonoBehaviour
 
     private void WinThisGame(int playerIndex)
     {
-        gameUI.ShowWinGameMessage(playerIndex);
+        gameUI.ShowWinMessage(playerIndex);
     }
 
     private void SetCurrentPlayer(int playerIndex)

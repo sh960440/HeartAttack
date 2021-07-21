@@ -75,29 +75,48 @@ public class GameUIController : MonoBehaviour
         cardButtonImages[playerIndex].color = targetColor;
     }
 
-    public void ShowWinGameMessage(int playerIndex)
+    public void ShowWinMessage(int playerIndex) // 可以考慮簡化
     {
-        string winner = "Someone";
-        switch (playerIndex)
-        {
-            case 0:
-                winner = "Green"; break;
-            case 1:
-                winner = "Yellow"; break;
-            case 2:
-                winner = "Blue"; break;
-            case 3:
-                winner = "Red"; break;
-        }
-        
         foreach (RectTransform rectTransform in gameMessage)
         {
             TMP_Text t;
             if (rectTransform.TryGetComponent<TMP_Text>(out t))
             {
-                t.text = "Player " + winner + " Wins!";
+                t.text = "Player " + ConvertPlayerColorFromIndex(playerIndex) + " Wins!";
             }
         }
+
         gameMessage.gameObject.SetActive(true);
+        gameMessage.Find("NextButton").gameObject.SetActive(false);
+    }
+
+    public void ShowLoseMessage(int playerIndex, int cardNumber)
+    {
+        foreach (RectTransform rectTransform in gameMessage)
+        {
+            TMP_Text t;
+            if (rectTransform.TryGetComponent<TMP_Text>(out t))
+            {
+                t.text = "Player " + ConvertPlayerColorFromIndex(playerIndex) + " Gets " + cardNumber + " More Cards!";
+            }
+        }
+
+        gameMessage.gameObject.SetActive(true);
+    }
+
+    private string ConvertPlayerColorFromIndex(int playerIndex)
+    {
+        switch (playerIndex) 
+        {
+            default:
+            case 0:
+                return "Green";
+            case 1:
+                return "Yellow";
+            case 2:
+                return "Blue";
+            case 3:
+                return "Red";
+        }
     }
 }
