@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player
 {
-    private List<Card> cardsInHand; 
+    private List<Card> cardsInHand;
 
     public Player(List<Card> initialHand)
     {

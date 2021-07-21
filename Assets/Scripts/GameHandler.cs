@@ -40,15 +40,15 @@ public class GameHandler : MonoBehaviour
             if (players[playerIndex].HasNoCards())
             {
                 Debug.Log("玩家" + playerIndex + "沒牌了!");
-                WinThisGame(playerIndex);
+
+                //WinThisGame(playerIndex); // TODO
             }
 
             currentNumber++;
             if (currentNumber > 13) currentNumber = 1;
             gameUI.UpdateNumberTrackers(currentNumber);
             
-            currentPlayer++;
-            if (currentPlayer > 3) currentPlayer = 0;
+            AdvanceToNextPlayer();
             SetCurrentPlayer(currentPlayer);
         }
     }
@@ -68,7 +68,14 @@ public class GameHandler : MonoBehaviour
             }
             else
             {
-                didPlayersSlap[playerIndex] = true;
+                if (players[playerIndex].HasNoCards())
+                {
+                    WinThisGame(playerIndex);
+                }
+                else
+                {
+                    didPlayersSlap[playerIndex] = true;
+                }
             }            
         }
         else
@@ -114,6 +121,16 @@ public class GameHandler : MonoBehaviour
         }
 
         gameUI.UpdateNumberTrackers(-1);
+    }
+
+    private void AdvanceToNextPlayer()
+    {
+        int tracker = 0;
+        do {
+            currentPlayer++;
+            if (currentPlayer > 3) currentPlayer = 0;
+            tracker++;
+        } while (players[currentPlayer].HasNoCards() && tracker < 4);
     }
 
     private void WinThisGame(int playerIndex)
