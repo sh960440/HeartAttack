@@ -82,6 +82,7 @@ public class GameUIController : MonoBehaviour
             TMP_Text t;
             if (rectTransform.TryGetComponent<TMP_Text>(out t))
             {
+                t.color = GetPlayerColor(playerIndex);
                 t.text = "Player " + ConvertPlayerColorFromIndex(playerIndex) + " Wins!";
             }
         }
@@ -97,7 +98,8 @@ public class GameUIController : MonoBehaviour
             TMP_Text t;
             if (rectTransform.TryGetComponent<TMP_Text>(out t))
             {
-                t.text = "Player " + ConvertPlayerColorFromIndex(playerIndex) + " Gets " + cardNumber + " More Cards!";
+                t.color = GetPlayerColor(playerIndex);
+                t.text = "Player " + ConvertPlayerColorFromIndex(playerIndex) + " +" + cardNumber + "!";
             }
         }
 
@@ -117,6 +119,22 @@ public class GameUIController : MonoBehaviour
                 return "Blue";
             case 3:
                 return "Red";
+        }
+    }
+
+    private Color GetPlayerColor(int playerIndex)
+    {
+        switch (playerIndex) 
+        {
+            default:
+            case 0:
+                return Color.green;
+            case 1:
+                return Color.yellow;
+            case 2:
+                return Color.blue;
+            case 3:
+                return Color.red;
         }
     }
 }
