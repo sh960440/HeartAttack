@@ -19,6 +19,12 @@ public class GameUIController : MonoBehaviour
         gameMessage = transform.Find("GameMessage").GetComponent<RectTransform>();
 
         numberTrackers.gameObject.SetActive(GameSettings.hasNumberTracker);
+
+        if (GameSettings.playerAmount == 2)
+        {
+            transform.Find("Player2").gameObject.SetActive(false);
+            transform.Find("Player3").gameObject.SetActive(false);
+        }
     }
 
     public void ShowSlapImage(int index)

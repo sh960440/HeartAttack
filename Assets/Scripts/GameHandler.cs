@@ -18,15 +18,23 @@ public class GameHandler : MonoBehaviour
         gameUI = FindObjectOfType<GameUIController>();
         cardStack = FindObjectOfType<CardStack>();
         players = new List<Player>();
-        didPlayersSlap = new bool[] {false, false, false, false};
+        if (GameSettings.playerAmount == 2)
+        {
+            didPlayersSlap = new bool[] {false, false};
+        }
+        else
+        {
+            didPlayersSlap = new bool[] {false, false, false, false};
+        }
 
-        SetCurrentPlayer(Random.Range(0, 4));
+        SetCurrentPlayer(Random.Range(0, GameSettings.playerAmount));
 
         currentNumber = 0;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < GameSettings.playerAmount; i++)
         {
             players.Add(new Player(cardStack.DistributeCards()));
+            gameUI.UpdateCardButtonText(i, 52 / GameSettings.playerAmount);
             //Debug.Log("玩家" + i + "有" + players[i].GetCardAmount() + "張卡");
         }
     }
@@ -55,7 +63,7 @@ public class GameHandler : MonoBehaviour
 
         if (currentNumber == cardStack.GetCardNumberOnTop())
         {
-            if (CheckHowManyPlayersSlapped() >= 2)
+            if (CheckHowManyPlayersSlapped() >= GameSettings.playerAmount - 1)
             {
                 didPlayersSlap[playerIndex] = true;
                 LoseThisTurn(GetSlowestPlayer());
@@ -122,7 +130,7 @@ public class GameHandler : MonoBehaviour
         int tracker = 0;
         do {
             currentPlayer++;
-            if (currentPlayer > 3) currentPlayer = 0;
+            if (currentPlayer >= GameSettings.playerAmount) currentPlayer = 0;
             tracker++;
         } while (players[currentPlayer].HasNoCards() && tracker < 4);
     }
