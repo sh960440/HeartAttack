@@ -19,6 +19,14 @@ public class MenuUIController : MonoBehaviour
         languagePanel = transform.Find("Language").GetComponent<RectTransform>();
     }
 
+    // void Start()
+    // {
+    //     SwapButtonTransparency(playerAmountPanel);
+    //     SwapButtonTransparency(cardAmountPanel);
+    //     SwapButtonTransparency(numberTrackerPanel);
+    //     SwapButtonTransparency(languagePanel);
+    // }
+
     public void SetPlayerAmount(int playerAmount)
     {
         if (GameSettings.playerAmount == playerAmount) return;

@@ -17,6 +17,8 @@ public class GameUIController : MonoBehaviour
         hands = transform.Find("HandIcons").GetComponent<RectTransform>();
         numberTrackers = transform.Find("NumberTrackers").GetComponent<RectTransform>();
         gameMessage = transform.Find("GameMessage").GetComponent<RectTransform>();
+
+        numberTrackers.gameObject.SetActive(GameSettings.hasNumberTracker);
     }
 
     public void ShowSlapImage(int index)

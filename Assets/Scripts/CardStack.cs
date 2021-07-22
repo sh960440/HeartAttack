@@ -6,6 +6,11 @@ public class CardStack : MonoBehaviour
 {
     public List<Card> cardsOnTable; 
 
+    private void Awake()
+    {
+        //cardsOnTable.AddRange(cardsOnTable);
+    }
+
     public void SpawnCard(Card card)
     {
         cardsOnTable.Add(card);
@@ -30,7 +35,7 @@ public class CardStack : MonoBehaviour
         if (cardsOnTable.Count > 0)
         {
             List<Card> selectedCards = new List<Card>();
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < 13; i++) // TODO: 13改成總卡數/玩家數
             {
                 int index = Random.Range(0, cardsOnTable.Count - 1);
                 selectedCards.Add(cardsOnTable[index]);

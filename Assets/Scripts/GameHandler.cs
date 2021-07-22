@@ -27,6 +27,7 @@ public class GameHandler : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             players.Add(new Player(cardStack.DistributeCards()));
+            //Debug.Log("玩家" + i + "有" + players[i].GetCardAmount() + "張卡");
         }
     }
 
@@ -36,13 +37,6 @@ public class GameHandler : MonoBehaviour
         {
             players[playerIndex].PlayCard(cardStack);
             gameUI.UpdateCardButtonText(playerIndex, players[playerIndex].GetCardAmount());
-
-            if (players[playerIndex].HasNoCards())
-            {
-                Debug.Log("玩家" + playerIndex + "沒牌了!");
-
-                //WinThisGame(playerIndex); // TODO
-            }
 
             currentNumber++;
             if (currentNumber > 13) currentNumber = 1;
@@ -146,6 +140,7 @@ public class GameHandler : MonoBehaviour
 
     public void Replay()
     {
-        SceneManager.LoadScene("Game");
+        GameSettings.Reset();
+        SceneManager.LoadScene("Menu");
     }
 }
