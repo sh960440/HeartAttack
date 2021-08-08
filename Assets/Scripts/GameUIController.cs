@@ -9,11 +9,14 @@ public class GameUIController : MonoBehaviour
     private RectTransform hands;
     private RectTransform numberTrackers;
     private RectTransform gameMessage;
+    private AudioSource slapSound;
+    public AudioSource GetSlapSound => slapSound;
     [SerializeField] private Image[] cardButtonImages;
     [SerializeField] private TMP_Text[] cardButtonTexts;
 
     private void Awake()
     {
+        slapSound = GetComponent<AudioSource>();
         hands = transform.Find("HandIcons").GetComponent<RectTransform>();
         numberTrackers = transform.Find("NumberTrackers").GetComponent<RectTransform>();
         gameMessage = transform.Find("GameMessage").GetComponent<RectTransform>();

@@ -11,10 +11,12 @@ public class GameHandler : MonoBehaviour
     private bool[] didPlayersSlap;
     private int currentPlayer;
     private int currentNumber;
+    private AudioSource cardPlaceSound;
     
 
     private void Start()
     {
+        cardPlaceSound = GetComponent<AudioSource>();
         gameUI = FindObjectOfType<GameUIController>();
         cardStack = FindObjectOfType<CardStack>();
         players = new List<Player>();
@@ -43,6 +45,8 @@ public class GameHandler : MonoBehaviour
     {
         if (currentPlayer == playerIndex)
         {
+            cardPlaceSound.Play();
+
             players[playerIndex].PlayCard(cardStack);
             gameUI.UpdateCardButtonText(playerIndex, players[playerIndex].GetCardAmount());
 
@@ -59,6 +63,7 @@ public class GameHandler : MonoBehaviour
     {
         if (cardStack.GetCardAmountOnTable() <= 0) return; // 假如桌上沒有任何牌
 
+        gameUI.GetSlapSound.Play();
         gameUI.ShowSlapImage(playerIndex);
 
         if (currentNumber == cardStack.GetCardNumberOnTop())
@@ -88,7 +93,7 @@ public class GameHandler : MonoBehaviour
 
     private int CheckHowManyPlayersSlapped()
     {
-        int count = 0;
+        int count = 1;
         foreach (bool b in didPlayersSlap)
         {
             if (b) count++;
